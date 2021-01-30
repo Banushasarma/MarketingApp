@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 
 import ViewImageScreen from './app/screens/ViewImageScreen';
@@ -13,18 +13,16 @@ import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreen from './app/screens/ListingScreen';
+import AppTextInput from './app/components/AppTextInput';
+import AppPicker from './app/components/AppPicker';
+import LoginScreen from './app/screens/LoginScreen';
 
 export default function App() {
-  // return <WelcomeScreen />
-  // return <ViewImageScreen />
-  // return <ListingDetailsScreen />
-  // return <MessagesScreen />
 
-  // return <Screen>
-  //   <ListItem title="My title" ImageComponent={<Icon name="email" />} />
-  // </Screen>
-  // return <AccountScreen />
-  return <ListingScreen />
+
+  return (
+    <LoginScreen></LoginScreen>
+  );
 }
 
 const styles = StyleSheet.create({
