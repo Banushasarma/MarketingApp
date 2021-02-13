@@ -7,6 +7,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Screen from './app/screens/Screen';
 import AppButton from './app/components/AppButton';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import navigationTheme from './app/navigation/navigationTheme';
+import AppNavigator from './app/navigation/AppNavigator';
 
 
 const Link = () => {
@@ -59,7 +62,8 @@ const TabNavigator = () => (
       activeBackgroundColor: "tomato",
       activeTintColor: "blue",
       inactiveBackgroundColor: "#eee",
-      inactiveTintColor: "black"
+      inactiveTintColor: "black",
+      showLabel: false
     }}
   >
     <Tab.Screen
@@ -81,8 +85,8 @@ const TabNavigator = () => (
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TabNavigator />
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
     </NavigationContainer>
   )
 }
