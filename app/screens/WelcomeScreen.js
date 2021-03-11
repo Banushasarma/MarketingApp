@@ -8,7 +8,7 @@ function WelcomeScreen({ navigation }) {
     return (
         <ImageBackground blurRadius={5} style={styles.background} source={require('../assets/background.jpg')}>
             <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../assets/logo.png')} />
+                <Image style={styles.logo} source={require('../assets/icon.png')} />
                 <Text style={styles.tagline}>Sell What you Don't Need</Text>
             </View>
             <View style={styles.buttonContainer}>
