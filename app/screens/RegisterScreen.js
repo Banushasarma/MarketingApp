@@ -7,6 +7,8 @@ import { AppForm, AppFormField, ErrorMessage, SubmitButton } from '../components
 import users from '../api/users'
 import authApi from '../api/auth'
 import useAuth from '../auth/useAuth'
+import useApi from '../hooks/useApi'
+import ActivityIndicator from '../components/ActivityIndicator'
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
@@ -15,12 +17,14 @@ const validationSchema = Yup.object().shape({
 })
 
 export default function RegisterScreen() {
+    const registerApi = useApi(users.register)
+    const loginApi = useApi(authApi.login)
     const [error, setError] = useState('')
     const [isError, setIsError] = useState(false)
     const { logIn } = useAuth()
 
     const handleSubmit = async (userInfo) => {
-        const result = await users.register(userInfo)
+        const result = await registerApi.request(userInfo)
 
         if (!result.ok) {
             if (result.data) {
@@ -36,7 +40,7 @@ export default function RegisterScreen() {
             return;
         }
 
-        const { data: authToken } = await authApi.login(
+        const { data: authToken } = await loginApi.request(
             userInfo.email,
             userInfo.password
         )
@@ -45,49 +49,52 @@ export default function RegisterScreen() {
     }
 
     return (
-        <Screen style={styles.container}>
-            <AppForm
-                initialValues={{ email: '', name: '', password: '' }}
-                onSubmit={handleSubmit}
-                validationSchema={validationSchema}
-            >
-                <ErrorMessage visible={error} error={error} />
+        <>
+            <ActivityIndicator isLoading={registerApi.loading || loginApi.loading} />
+            <Screen style={styles.container}>
+                <AppForm
+                    initialValues={{ email: '', name: '', password: '' }}
+                    onSubmit={handleSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <ErrorMessage visible={error} error={error} />
 
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    icon="account"
-                    keyboardType="default"
-                    maxLength={50}
-                    name="name"
-                    placeholder="Name"
-                    textContentType="name"
-                />
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="account"
+                        keyboardType="default"
+                        maxLength={50}
+                        name="name"
+                        placeholder="Name"
+                        textContentType="name"
+                    />
 
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    icon="email"
-                    keyboardType="email-address"
-                    maxLength={75}
-                    name="email"
-                    placeholder="Email"
-                    textContentType="emailAddress"
-                />
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="email"
+                        keyboardType="email-address"
+                        maxLength={75}
+                        name="email"
+                        placeholder="Email"
+                        textContentType="emailAddress"
+                    />
 
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    icon="lock"
-                    name="password"
-                    placeholder="Password"
-                    textContentType="password"
-                    secureTextEntry
-                />
-                <SubmitButton title="Register" />
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="lock"
+                        name="password"
+                        placeholder="Password"
+                        textContentType="password"
+                        secureTextEntry
+                    />
+                    <SubmitButton title="Register" />
 
-            </AppForm>
-        </Screen>
+                </AppForm>
+            </Screen>
+        </>
     )
 }
 
