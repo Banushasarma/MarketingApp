@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import AppLoading from 'expo-app-loading';
+import * as Notifications from 'expo-notifications';
 
 
 import Screen from './app/screens/Screen';
@@ -19,6 +20,8 @@ import OfflineNotice from './app/components/OfflineNotice';
 import AppText from './app/components/AppText';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage';
+import { navigationRef } from './app/navigation/rootNavigation';
+
 
 export default function App() {
   const [user, setUser] = useState()
@@ -47,12 +50,10 @@ export default function App() {
       <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={console.warn} />
     )
 
-
-  //demo()
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>
