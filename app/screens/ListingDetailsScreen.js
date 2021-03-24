@@ -1,6 +1,6 @@
-import React from 'react'
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
-import { Image } from 'react-native-expo-image-cache'
+import React from 'react';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
+import { Image } from 'react-native-expo-image-cache';
 
 import AppText from '../components/AppText'
 import ContactSellerForm from '../components/ContactSellerForm'

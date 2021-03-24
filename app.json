@@ -23,11 +23,26 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package":"com.sharmabanu.donewithit",
+      "versionCode":1
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": ""
+    "description": "",
+    "extra": {
+      "bugsnag": {
+        "apiKey": "8aef08edcfb5cfd30c022712791801b5"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
+    }
   }
 }

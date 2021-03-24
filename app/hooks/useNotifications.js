@@ -32,7 +32,6 @@ export default useNotifications = (notificationListner) => {
                 lightColor: '#FF231F7C',
             });
         }
-        console.log('hiiiiiiiiiii')
     }
 
 }

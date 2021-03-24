@@ -21,9 +21,12 @@ import AppText from './app/components/AppText';
 import AuthContext from './app/auth/context';
 import authStorage from './app/auth/storage';
 import { navigationRef } from './app/navigation/rootNavigation';
+import logger from './app/Utility/logger'
 
+//logger.start()
 
 export default function App() {
+  // logger.log(new Error('Error in app'))
   const [user, setUser] = useState()
   const [isReady, setIsReady] = useState(false)
 
